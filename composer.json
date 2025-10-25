@@ -75,7 +75,16 @@
         ],
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
-        ]
+        ],
+          "post-install-cmd": [
+            "@php artisan storage:link || true",
+            "@php artisan config:clear || true",
+            "@php artisan route:clear || true",
+            "@php artisan view:clear || true"
+        ],
+        "heroku-prebuild": "npm ci --legacy-peer-deps",
+        "heroku-postbuild": "npm run build"
+
     },
     "extra": {
         "laravel": {
